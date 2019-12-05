@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysx.mapper.FileMapper">
+	
+	<select id="query" resultType="com.ysx.pojo.File" parameterType="map">
+		select * from file f
+		<where>
+			<if test="key!=null and key!=''">
+				and f.name like concat('%',#{key},'%')
+			</if>
+			<if test="direct!=null and direct!=''">
+				and f.direct like concat('%',#{direct},'%')
+			</if>
+			<if test="start!=null and start''">
+				<![CDATA[
+					and f.begintime >= #{start}
+				]]>
+			</if>
+			<if test="end!=null and end''">
+				<![CDATA[
+					and f.begintime <= #{end}
+				]]>
+			</if>
+		</where>
+	</select>
+	
+
+
+</mapper>
